@@ -8,6 +8,7 @@ Thư mục này chứa các prompt mẫu dùng nhanh (copy → paste → gửi) 
 
 | # | File | Command Tương Ứng | Mục Đích |
 |---|---|---|---|
+| 00 | `prompt_00_generate_performance_test_plan.txt` | `/generate-performance-test-plan` | Lập Kế Hoạch Kiểm Thử Hiệu Năng (Master Plan) chuẩn ISO/IEC 29119-3 & IEEE 829 (12 mục chuẩn) |
 | 01 | `prompt_01_generate_workload_model.txt` | `/generate-k6-workload-model` | Lập mô hình tải (Workload Model) khoa học từ số liệu kinh doanh & NFR qua Định luật Little |
 | 02 | `prompt_02_generate_k6_framework.txt` | `/generate-k6-framework` | Scaffold cấu trúc framework k6 chuẩn Enterprise trong thư mục `k6/` |
 | 03 | `prompt_03_generate_k6_script.txt` | `/generate-k6-script` | Sinh script k6 từ OpenAPI/Swagger, HAR file hoặc Postman có correlation động |

@@ -1,0 +1,28 @@
+/generate-performance-test-plan
+
+# ĐẦU VÀO
+- Tên hệ thống / Dự án: [VD: E-Commerce Web & API Platform]
+- Module hoặc Toàn hệ thống: [VD: Toàn bộ chuỗi mua hàng E2E: Auth, Product Search, Cart, Checkout]
+- Bối cảnh kinh doanh (Business Driver): [VD: Chuẩn bị cho chiến dịch Flash Sale ngày 11/11, dự kiến lượng traffic tăng gấp 5 lần ngày thường]
+
+# CONTEXT & SỐ LIỆU MỤC TIÊU (NFRs)
+- Traffic mục tiêu: [VD: 100,000 active users/ngày, peak hour 35% từ 12h-14h, ước tính 300 - 500 RPS]
+- SLAs cam kết:
+  + Response Time P95: [VD: < 1500ms cho API thông thường, < 2500ms cho Checkout]
+  + Response Time P99: [VD: < 3000ms]
+  + Error Rate tối đa: [VD: < 1%]
+- Môi trường chạy test:
+  + Môi trường: [VD: Staging Environment độc lập]
+  + Quy mô phần cứng so với Prod: [VD: 50% cấu hình Prod (Scale ratio 1:2)]
+  + Cơ sở dữ liệu: [Đã seed 1,000,000 bản ghi sản phẩm & 500,000 người dùng tương đương Prod]
+- Giám sát (Monitoring): [k6 HTML Report + Datadog APM + PostgreSQL pg_stat_activity]
+
+# NHÂN SỰ & THỜI GIAN DỰ KIẾN
+- Performance Lead: [Tên QA Lead / PM]
+- Backend Dev hỗ trợ: [Tên Tech Lead]
+- DevOps/SRE: [Tên DevOps]
+- Thời gian thực thi dự kiến: [VD: 2 tuần từ 01/11 đến 15/11]
+
+# GHI CHÚ
+- Agent tự biên soạn theo cấu trúc 12 phần chuẩn quốc tế ISO/IEC/IEEE 29119-3 & IEEE 829
+- Xuất tài liệu ra: docs/performance/PERFORMANCE_TEST_PLAN_<TEN_HE_THONG>.md

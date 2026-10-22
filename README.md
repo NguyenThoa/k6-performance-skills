@@ -32,22 +32,24 @@ Bộ repo này được đúc kết từ **20 năm kinh nghiệm Performance Lea
 ```
 k6-performance-skills/
 ├── .claude/
-│   ├── commands/                 # 6 Slash Commands chuyên biệt
-│   │   ├── generate-k6-workload-model.md
-│   │   ├── generate-k6-framework.md
-│   │   ├── generate-k6-script.md
-│   │   ├── analyze-k6-performance-report.md
-│   │   ├── generate-test-data.md
-│   │   └── generate-api-mocks.md
+│   ├── commands/                 # 7 Slash Commands chuyên biệt
+│   │   ├── generate-performance-test-plan.md # /generate-performance-test-plan (Master Plan ISO 29119-3)
+│   │   ├── generate-k6-workload-model.md     # /generate-k6-workload-model (Little's Law, VUs, RPS)
+│   │   ├── generate-k6-framework.md          # /generate-k6-framework (Scaffold modular framework)
+│   │   ├── generate-k6-script.md             # /generate-k6-script (Convert OpenAPI/HAR sang k6)
+│   │   ├── analyze-k6-performance-report.md  # /analyze-k6-performance-report (Chẩn đoán RCA & Gate)
+│   │   ├── generate-test-data.md             # /generate-test-data (CSV/JSON data feeder)
+│   │   └── generate-api-mocks.md             # /generate-api-mocks (Mocking 3rd party)
 │   ├── rules/
 │   │   └── performance_rules.md  # 5 quy tắc bắt buộc về an toàn tải, SLA P95/P99
-│   ├── skills/                   # 6 Kỹ năng chuyên môn sâu cho AI
-│   │   ├── skills-k6-workload-modeler
-│   │   ├── skills-k6-framework-architect
-│   │   ├── skills-k6-script-generator
-│   │   ├── skills-k6-analyzer-diagnoser
-│   │   ├── skills-test-data-generator
-│   │   └── skills-api-mocking
+│   ├── skills/                   # 7 Kỹ năng chuyên môn sâu cho AI
+│   │   ├── skills-performance-test-planner   # Lập kế hoạch tải chuẩn ISO/IEC 29119-3 & IEEE 829
+│   │   ├── skills-k6-workload-modeler        # Lập mô hình tải khoa học, 6 loại test
+│   │   ├── skills-k6-framework-architect     # Kiến trúc framework k6 phân tầng
+│   │   ├── skills-k6-script-generator        # Sinh code k6 chuẩn, dynamic correlation
+│   │   ├── skills-k6-analyzer-diagnoser      # Chẩn đoán điểm nghẽn & Quality Gate
+│   │   ├── skills-test-data-generator        # Sinh dữ liệu lớn nạp SharedArray
+│   │   └── skills-api-mocking                # Mocking 3rd-party cô lập hệ thống
 │   └── settings.json             # Quyền hạn thực thi k6 & shell cho Claude Code
 ├── k6/                           # MÃ NGUỒN FRAMEWORK k6 CHUẨN ENTERPRISE
 │   ├── config/                   # environments, options, thresholds
@@ -58,7 +60,8 @@ k6-performance-skills/
 │   ├── reports/                  # Lưu HTML Report & summary JSON
 │   ├── package.json              # npm scripts chạy test nhanh
 │   └── README.md                 # Hướng dẫn chi tiết chạy k6
-├── prompts/                      # 6 PROMPT MẪU DÙNG NHANH (Copy → Paste → Gửi)
+├── prompts/                      # 7 PROMPT MẪU DÙNG NHANH (Copy → Paste → Gửi)
+│   ├── prompt_00_generate_performance_test_plan.txt
 │   ├── prompt_01_generate_workload_model.txt
 │   ├── prompt_02_generate_k6_framework.txt
 │   ├── prompt_03_generate_k6_script.txt
@@ -69,6 +72,7 @@ k6-performance-skills/
 ├── docs/
 │   └── performance/              # ĐẦU RA KẾT QUẢ DỰ ÁN
 │       ├── README.md
+│       ├── PERFORMANCE_TEST_PLAN_<MODULE>.md  # Bản kế hoạch cấp quản lý ký duyệt
 │       └── <module>/
 │           ├── WORKLOAD_MODEL_<MODULE>.md
 │           └── runs/run_<timestamp>/performance_report.md
@@ -79,17 +83,17 @@ k6-performance-skills/
 
 ---
 
-## 🔄 Quy Trình 4 Chặng Kiểm Thử Hiệu Năng (End-to-End Workflow)
+## 🔄 Quy Trình 5 Chặng Kiểm Thử Hiệu Năng (End-to-End Performance Lifecycle)
 
 ```
-[Chặng 1: Lập Mô Hình Tải] ──────> [Chặng 2: Scaffold Framework]
-  /generate-k6-workload-model         /generate-k6-framework
-  (Tính VUs, Little's Law, SLAs)      (Chuẩn hóa cấu trúc thư mục k6/)
-                 │                                   │
-                 ▼                                   ▼
-[Chặng 4: Chẩn Đoán & Quality Gate] <─── [Chặng 3: Sinh Script k6]
-  /analyze-k6-performance-report       /generate-k6-script
-  (Phân tích P95, RCA, GO/NO-GO)       (Convert OpenAPI/HAR, Correlation)
+[Chặng 0: Lập Kế Hoạch Chuẩn] ────> [Chặng 1: Lập Mô Hình Tải] ────> [Chặng 2: Scaffold Framework]
+  /generate-performance-test-plan     /generate-k6-workload-model         /generate-k6-framework
+  (ISO 29119-3 / IEEE 829 Plan)       (Tính VUs, Little's Law, SLAs)      (Chuẩn hóa cấu trúc k6/)
+                                                     │                                   │
+                                                     ▼                                   ▼
+                                    [Chặng 4: Chẩn Đoán & Quality Gate] <─── [Chặng 3: Sinh Script k6]
+                                      /analyze-k6-performance-report       /generate-k6-script
+                                      (Phân tích P95, RCA, GO/NO-GO)       (Convert OpenAPI/HAR, Correlation)
 ```
 
 ---

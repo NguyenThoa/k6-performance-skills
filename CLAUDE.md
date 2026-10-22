@@ -31,6 +31,7 @@
 
 ## 3. Danh Mục Lệnh (Slash Commands)
 
+- `/generate-performance-test-plan`: Lập Kế Hoạch Kiểm Thử Hiệu Năng cấp quản lý (Master Plan) chuẩn ISO/IEC/IEEE 29119-3 & IEEE 829.
 - `/generate-k6-workload-model`: Lập mô hình tải khoa học, tính VUs, RPS và 6 kịch bản tải.
 - `/generate-k6-framework`: Khởi tạo hoặc cập nhật cấu trúc framework k6 chuẩn Enterprise.
 - `/generate-k6-script`: Tự động sinh script k6 từ OpenAPI, file HAR capture hoặc Postman.
