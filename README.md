@@ -2,7 +2,7 @@
 
 Chào mừng bạn đến với **k6 Performance Testing Skills** — bộ công cụ và kỹ năng kiểm thử hiệu năng doanh nghiệp được thiết kế chuyên biệt cho **Claude Code** và **Grafana k6**.
 
-Bộ repo này được đúc kết từ **20 năm kinh nghiệm Performance Lead / PM** kết hợp **5 năm ứng dụng AI trong tự động hóa kiểm thử tải**, loại bỏ hoàn toàn các phương pháp "đoán mò số VUs", mang đến quy trình kiểm thử hiệu năng khoa học từ khâu lập mô hình tải, sinh mã kịch bản, đến chẩn đoán nút thắt cổ chai (bottlenecks) và thẩm định phát hành (Release Gate).
+Bộ repo này được đúc kết từ **Thoant Tester**, loại bỏ hoàn toàn các phương pháp "đoán mò số VUs", mang đến quy trình kiểm thử hiệu năng khoa học từ khâu lập mô hình tải, sinh mã kịch bản, đến chẩn đoán nút thắt cổ chai (bottlenecks) và thẩm định phát hành (Release Gate).
 
 ---
 
