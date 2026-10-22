@@ -1,0 +1,16 @@
+/analyze-k6-performance-report
+
+# ĐẦU VÀO
+- File kết quả k6: [VD: k6/reports/summary.json HOẶC paste log k6 terminal vào đây]
+- File Workload Model: [docs/performance/<module>/WORKLOAD_MODEL_<MODULE>.md]
+
+# CONTEXT
+- Module: [VD: checkout]
+- Đợt test: [VD: load-test-release-v2.1]
+- SLAs cần đối soát: [P95 < 1500ms, Error rate < 1%]
+
+# GHI CHÚ
+- Agent tự động trích xuất: VUs, RPS, P50, P90, P95, P99, Max latency, Error Rate
+- Đối soát Quality Gate: 🟢 PASS / 🟡 WARN / 🔴 FAIL
+- Chẩn đoán nguyên nhân gốc rễ (RCA) nếu có lỗi / chậm: DB Slow queries, Connection Pool leak, Memory leak, Rate limit (429)
+- Báo cáo lưu tại: docs/performance/<module>/runs/run_<timestamp>_<loại-test>/performance_report.md

@@ -1,0 +1,16 @@
+/generate-k6-script
+
+# ĐẦU VÀO
+- Nguồn API: [OpenAPI / Swagger URL hoặc file / HAR file capture / Postman Collection]
+- Module nghiệp vụ: [VD: checkout / user-journey]
+- Loại kịch bản muốn sinh: [smoke / load / stress / spike / soak]
+
+# CONTEXT
+- File Workload Model (nếu có): [docs/performance/<module>/WORKLOAD_MODEL_<MODULE>.md]
+- Test Data: [Tự động sinh data/users.json HOẶC dùng file CSV có sẵn]
+- Dynamic Correlation: [Trích xuất token từ login, lấy Order ID từ POST orders truyền vào GET orders/:id]
+
+# GHI CHÚ
+- Agent tự tách Service class vào k6/services/ và Scenario vào k6/scenarios/
+- Bắt buộc gắn tag URL tĩnh để tránh bùng nổ cardinality k6 (VD: tags: { name: 'GET /orders/:id' })
+- Tự động tích hợp Think Time ngẫu nhiên và check assertions HTTP status + payload

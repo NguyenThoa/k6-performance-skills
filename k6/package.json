@@ -1,0 +1,19 @@
+{
+  "name": "k6-performance-suite",
+  "version": "1.0.0",
+  "description": "Enterprise Performance Testing Suite with Grafana k6",
+  "scripts": {
+    "test:smoke": "k6 run scenarios/smoke-test.js",
+    "test:load": "k6 run scenarios/load-test.js",
+    "test:stress": "k6 run --config config/options.js scenarios/load-test.js",
+    "format": "prettier --write '**/*.js'"
+  },
+  "keywords": [
+    "k6",
+    "performance-testing",
+    "load-testing",
+    "stress-testing"
+  ],
+  "author": "AI QA Automation Engineer",
+  "license": "ISC"
+}

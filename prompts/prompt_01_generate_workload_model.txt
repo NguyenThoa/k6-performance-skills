@@ -1,0 +1,19 @@
+/generate-k6-workload-model
+
+# ĐẦU VÀO
+- Tên module/nghiệp vụ: [VD: authentication / checkout / search / cart]
+- Nguồn API: [VD: openapi.json HOẶC Swagger URL HOẶC file tài liệu API]
+
+# CONTEXT & SỐ LIỆU NGHIỆP VỤ
+- Số lượng active users / ngày: [VD: 50,000 users / ngày]
+- Khung giờ cao điểm: [VD: 2 giờ trưa từ 11h-13h, chiếm 35% traffic ngày]
+- SLAs cam kết:
+  + Response Time P95: [VD: < 1500ms]
+  + Response Time P99: [VD: < 3000ms]
+  + Tỷ lệ lỗi tối đa (Error Rate): [VD: < 1%]
+- Môi trường chạy test: [VD: Staging / Perf-Lab] (Tuyệt đối không chạy tải cao lên Prod)
+
+# GHI CHÚ
+- Agent tự áp dụng Định luật Little (Little's Law: N = X * R) để tính VUs, RPS, Think Time
+- Tự thiết kế 6 kịch bản chuẩn: Smoke, Load, Stress, Spike, Soak, Breakpoint
+- Kết quả lưu vào: docs/performance/<module>/WORKLOAD_MODEL_<MODULE>.md

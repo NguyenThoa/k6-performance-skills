@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read project files",
+      "Read .env files",
+      "Run k6 commands",
+      "Run docker commands",
+      "Run npm and npx commands",
+      "Execute shell commands for testing"
+    ],
+    "deny": [
+      "Delete source files without confirmation"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+/generate-test-data
+
+# ĐẦU VÀO
+- Định dạng dữ liệu: [JSON / CSV]
+- Số lượng bản ghi cần tạo cho k6: [VD: 10,000 bản ghi]
+- Đường dẫn lưu: [k6/data/users.json HOẶC k6/data/customers.csv]
+
+# CONTEXT & CẤU TRÚC BẢN GHI
+- Cột/Trường dữ liệu:
+  + username: [perf_user_{n}]
+  + email: [perf_{n}_{random}@test.com]
+  + password: [Password123!]
+  + role: [customer / admin]
+
+# GHI CHÚ
+- Dữ liệu phục vụ kiểm thử hiệu năng k6 nạp qua SharedArray
+- Đảm bảo tính độc nhất (unique) để tránh va chạm lock database

@@ -1,0 +1,15 @@
+/generate-k6-framework
+
+# ĐẦU VÀO
+- Thư mục đích: [k6/] (mặc định tại root project)
+- Tên dự án: [VD: enterprise-performance-suite]
+
+# CONTEXT
+- Môi trường Base URL: [VD: https://api-staging.example.com]
+- Cơ chế xác thực (Auth): [Bearer Token / OAuth2 / API Key / Session Cookie]
+- Danh mục API Services ban đầu: [VD: auth, users, products, orders]
+
+# GHI CHÚ
+- Tự động scaffold toàn bộ thư mục k6/ chuẩn modular: config/, data/, libs/, services/, scenarios/, reports/
+- Bao gồm BaseHttpClient, AuthProvider (token cache), Think-Time random, Custom Metrics, SharedArray feeder
+- Tích hợp sẵn k6-reporter xuất báo cáo HTML và script npm trong package.json

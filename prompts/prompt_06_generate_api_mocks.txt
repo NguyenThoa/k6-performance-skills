@@ -1,0 +1,15 @@
+/generate-api-mocks
+
+# ĐẦU VÀO
+- Dịch vụ bên thứ ba cần mock: [VD: Payment Gateway (Stripe/VNPay) / SMS OTP Service / 3rd Party Shipping API]
+- Loại Mock: [WireMock / Mockoon / Node.js Express Mock Server]
+
+# CONTEXT
+- Mục tiêu: Tránh nghẽn bởi giới hạn rate limit hoặc tốn chi phí của bên thứ ba khi chạy Load/Stress test nội bộ
+- Port chạy mock server: [VD: 8080]
+- Kịch bản phản hồi:
+  + Happy path: trả về status 200/201 với latency 50ms - 150ms
+  + Chaos testing: giả lập delay 3s hoặc status 503 để kiểm tra circuit breaker
+
+# GHI CHÚ
+- Mock server giúp cô lập năng lực chịu tải thực sự của backend dưới thử nghiệm
