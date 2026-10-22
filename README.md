@@ -129,22 +129,51 @@ docker run --rm -i -v ${PWD}/k6:/k6 grafana/k6 run /k6/scenarios/smoke-test.js
 
 ## 🏃 Hướng Dẫn Bắt Đầu Nhanh
 
-### Bước 1: Khởi động Smoke Test
-Từ thư mục gốc:
-```bash
-cd k6
-npm run test:smoke
+Bạn có 2 cách tiếp cận tùy theo mục đích:
+
+---
+
+### Cách 1: Chạy Thử Nhanh Công Cụ k6 (Quick Dry-Run)
+*Dành cho người mới bắt đầu muốn kiểm tra môi trường và chạy thử script k6 mẫu trong 1 phút:*
+
+1. Di chuyển vào thư mục k6:
+   ```bash
+   cd k6
+   ```
+2. Chạy kịch bản Smoke Test (1 VU, 1 phút):
+   ```bash
+   npm run test:smoke
+   ```
+3. Xem báo cáo HTML sinh ra tại `k6/reports/smoke_test_summary.html`.
+
+---
+
+### Cách 2: Quy Trình Chuẩn Dự Án Từ A-Z (Enterprise Performance Delivery)
+*Dành cho chiến dịch kiểm thử tải thực tế của hệ thống / module — tuân thủ chuẩn quản lý chất lượng:*
+
+```
+[Bước 0: Lập Plan Chuẩn] ──> [Bước 1: Mô Hình Tải] ──> [Bước 2: Sinh Script] ──> [Bước 3: Chạy & Đo Đạc] ──> [Bước 4: Chẩn Đoán & Gate]
 ```
 
-### Bước 2: Thiết kế kịch bản tải mới
-1. Mở file `prompts/prompt_01_generate_workload_model.txt`, điền số lượng active users và SLAs mong muốn.
-2. Gửi vào Claude Code để tạo file `docs/performance/<module>/WORKLOAD_MODEL_<MODULE>.md`.
+* **Bước 0: Lập Kế Hoạch Kiểm Thử Hiệu Năng (Master Performance Test Plan)**
+  * Mở `prompts/prompt_00_generate_performance_test_plan.txt`, điền bối cảnh dự án, SLAs mong muốn, cấu hình máy chủ test và nhân sự phụ trách.
+  * Gửi vào Claude Code để xuất file `docs/performance/PERFORMANCE_TEST_PLAN_<HE_THONG>.md` chuẩn ISO/IEC 29119-3 & IEEE 829 làm căn cứ ký duyệt với Stakeholders/Khách hàng trước khi phát tải.
 
-### Bước 3: Tự động sinh kịch bản từ OpenAPI / Swagger
-1. Mở file `prompts/prompt_03_generate_k6_script.txt`, dán link Swagger/OpenAPI.
-2. Gửi vào Claude Code để tự động sinh file Service trong `k6/services/` và Scenario trong `k6/scenarios/`.
+* **Bước 1: Lập Mô Hình Tải Khoa Học (Workload Model)**
+  * Mở `prompts/prompt_01_generate_workload_model.txt`, điền traffic giờ cao điểm (Peak hours) và số active users.
+  * Gửi vào Claude Code để tính toán VUs, RPS theo Định luật Little ($N = X \times R$) và cấu hình Stages cho 6 kịch bản tải ra file `docs/performance/<module>/WORKLOAD_MODEL_<MODULE>.md`.
 
-### Bước 4: Chạy test và phân tích báo cáo
-1. Chạy kịch bản: `k6 run scenarios/load-test.js`
-2. Mở file `k6/reports/load_test_summary.html` để xem biểu đồ trực quan.
-3. Dùng lệnh `/analyze-k6-performance-report` để AI chẩn đoán nguyên nhân gốc rễ và xuất báo cáo Quality Gate.
+* **Bước 2: Tự Động Sinh Kịch Bản k6 Từ Swagger / OpenAPI**
+  * Mở `prompts/prompt_03_generate_k6_script.txt`, dán link Swagger/OpenAPI hoặc file HAR capture.
+  * Gửi vào Claude Code để tự động tạo Service class (`k6/services/`) và kịch bản E2E (`k6/scenarios/`) có đầy đủ Dynamic Correlation, static URL tagging và Random Think Time.
+
+* **Bước 3: Thực Thi Kịch Bản Kiểm Thử Tải**
+  * Chạy kịch bản kiểm thử tải:
+    ```bash
+    k6 run scenarios/load-test.js
+    ```
+  * Mở file `k6/reports/load_test_summary.html` trên trình duyệt để quan sát biểu đồ và bảng phân tích endpoint.
+
+* **Bước 4: Chẩn Đoán Điểm Nghẽn & Thẩm Định Phát Hành (Quality Gate)**
+  * Mở `prompts/prompt_04_analyze_performance_report.txt`, trích xuất kết quả chạy từ `k6/reports/summary.json`.
+  * Gửi vào Claude Code để AI chẩn đoán nguyên nhân gốc rễ (Database bottlenecks, Memory leaks, Ingress Rate Limit) và ra quyết định **Quality Gate: 🟢 PASS (RELEASE GO) / 🟡 WARN / 🔴 FAIL (NO-GO)**.
